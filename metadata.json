@@ -1,0 +1,6 @@
+{
+  "name": "FloraPlot - Survey Plant Height Tally PWA",
+  "description": "Progressive Web App for counting plant counts by height intervals across species in ecological survey plots with real-time summary totals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
