@@ -4,8 +4,13 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-export default defineConfig(() => {
+export default defineConfig(({ command }) => {
+  // Use '/floraplot/' when building for GitHub Pages (https://ginjaninja1065.github.io/floraplot/),
+  // or allow overriding via BASE_PATH. For dev server, use '/' so AI Studio and localhost work smoothly.
+  const base = process.env.BASE_PATH || (command === 'build' ? '/floraplot/' : '/');
+
   return {
+    base,
     plugins: [
       react(),
       tailwindcss(),
@@ -13,30 +18,30 @@ export default defineConfig(() => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon.svg'],
         manifest: {
-          id: '/',
+          id: base,
           name: 'FloraPlot - Survey Plant Height Tally',
           short_name: 'FloraPlot',
           description: 'Survey vegetation plant counts across height tiers per species with real-time totals.',
           theme_color: '#064e3b',
           background_color: '#f8fafc',
           display: 'standalone',
-          start_url: '/',
-          scope: '/',
+          start_url: base,
+          scope: base,
           icons: [
             {
-              src: '/pwa-192x192.png',
+              src: `${base}pwa-192x192.png`,
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-512x512.png',
+              src: `${base}pwa-512x512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-maskable-512x512.png',
+              src: `${base}pwa-maskable-512x512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
